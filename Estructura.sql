@@ -55,11 +55,7 @@ INSERT INTO ilerna_pac.asignaturas_pac (id_asignatura, nombre_asignatura, nombre
 UPDATE ILERNA_PAC.asignaturas_pac  SET CICLO = 'DAW';
 /
 
----------------------------------------------------------------
--- 2)	BLOQUES ANONIMOS -------------------------------------- 
----------------------------------------------------------------
-
--- 1. TABLA DE MULTIPLICAR
+-- 2.1. TABLA DE MULTIPLICAR
 
 --Código principal para poder ejecutar cualquier procedimiento, trigger, función y bloque anónimo.
 SET SERVEROUTPUT ON;
@@ -89,7 +85,7 @@ SET VERIFY OFF;
  END;
  /
 
--- 2. %IRPF SALARIO BRUTO ANUAL
+-- 2.2. %IRPF SALARIO BRUTO ANUAL
 
 --Código principal para poder ejecutar cualquier procedimiento, trigger, función y bloque anónimo.
 SET SERVEROUTPUT ON;
@@ -118,11 +114,7 @@ DBMS_OUTPUT.PUT_LINE('IRPF a pagar: '||SALARIO_MES*12*IRPF||'€');
 END;
 /
 
----------------------------------------------------------------
--- 3)	PROCEDIMIENTOS Y FUNCIONES SIMPLES -------------------- 
----------------------------------------------------------------
-
--- 1. SUMA IMPARES
+-- 3.1. SUMA IMPARES
 
 --Código principal para poder ejecutar cualquier procedimiento, trigger, función y bloque anónimo.
 SET SERVEROUTPUT ON;
@@ -153,7 +145,7 @@ BEGIN
 END;
 /
 
--- 2. NUMERO MAYOR
+-- 3.2. NUMERO MAYOR
 
  --Código principal para poder ejecutar cualquier procedimiento, trigger, función y bloque anónimo.
 SET SERVEROUTPUT ON;
@@ -187,11 +179,7 @@ RETURN (MAYOR);
 END;
 /
 
----------------------------------------------------------------
--- 4)	PROCEDIMIENTOS Y FUNCIONES COMPLEJAS ------------------ 
----------------------------------------------------------------
-
--- 1. DATOS DE EMPLEADO Y SU IRPF
+-- 4.1. DATOS DE EMPLEADO Y SU IRPF
 
 --Código principal para poder ejecutar cualquier procedimiento, trigger, función y bloque anónimo pero en este caso con un tamaño en específico.
 SET SERVEROUTPUT ON SIZE 1000000;
@@ -225,7 +213,7 @@ BEGIN
 END;
 /
 
--- 2. NUMERO DE EMPLEADOS POR TRAMO DE IRPF
+-- 4.2. NUMERO DE EMPLEADOS POR TRAMO DE IRPF
 
 --Código principal para poder ejecutar cualquier procedimiento, trigger, función y bloque anónimo.
 SET SERVEROUTPUT ON;
@@ -261,11 +249,7 @@ BEGIN
 END;
 /
 
----------------------------------------------------------------
--- 5)	GESTIÓN DE TRIGGERS ----------------------------------- 
----------------------------------------------------------------
-
--- 1. COMPENSACIÓN SALARIO POR CAMBIO TRAMO
+-- 5.1. COMPENSACIÓN SALARIO POR CAMBIO TRAMO
 
 --Código principal para poder ejecutar cualquier procedimiento, trigger, función y bloque anónimo.
 SET SERVEROUTPUT ON;
@@ -304,7 +288,7 @@ BEGIN
 END;
 /
 
--- 2. HISTORICO DE CAMBIOS DE SALARIO
+-- 5.2. HISTORICO DE CAMBIOS DE SALARIO
 
 /*DROP TABLE audita_salario;
 CREATE TABLE audita_salarios (
@@ -329,10 +313,10 @@ END;
 /
 
 ---------------------------------------------------------------
--- 6)   BLOQUES ANÓNIMOS PARA PRUEBAS DE CÓDIGO --------------- 
+--------BLOQUES ANÓNIMOS PARA PRUEBAS DE CÓDIGO --------------- 
 ---------------------------------------------------------------
 
--- 1.	COMPROBACIÓN REGISTROS DE TABLAS
+-- 6.1.	COMPROBACIÓN REGISTROS DE TABLAS
 /
 EXECUTE dbms_output.put_line('-- 1.	COMPROBACIÓN REGISTROS DE TABLAS');
 
@@ -381,7 +365,7 @@ DBMS_OUTPUT.PUT_LINE('----------------------------------------------------------
 END;
 /
 
--- 2.	COMPROBACIÓN DEL PROCEDIMIENTO “SUMA_IMPARES”
+-- 6.2.	COMPROBACIÓN DEL PROCEDIMIENTO “SUMA_IMPARES”
 /
 EXECUTE dbms_output.put_line('-- 2.	COMPROBACIÓN DEL PROCEDIMIENTO “SUMA_IMPARES”');
 --Código principal para poder ejecutar cualquier procedimiento, trigger, función y bloque anónimo.
@@ -404,7 +388,7 @@ BEGIN
 END;
  /
 
--- 3.	COMPROBACIÓN DE LA FUNCION “NUMERO_MAYOR”
+-- 6.3.	COMPROBACIÓN DE LA FUNCION “NUMERO_MAYOR”
 /
 EXECUTE dbms_output.put_line('-- 3.	COMPROBACIÓN DE LA FUNCION “NUMERO_MAYOR”');
 --Código principal para poder ejecutar cualquier procedimiento, trigger, función y bloque anónimo, pero en este caso de un tamaño en específico.
@@ -444,7 +428,7 @@ EXCEPTION
 END;
 /
 
--- 4.	COMPROBACIÓN DEL PROCEDIMIENTO “IRPF_EMPLEADO”
+-- 6.4.	COMPROBACIÓN DEL PROCEDIMIENTO “IRPF_EMPLEADO”
 /
 EXECUTE dbms_output.put_line('-- 4.	COMPROBACIÓN DEL PROCEDIMIENTO “IRPF_EMPLEADO”');
 --Código principal para poder ejecutar cualquier procedimiento, trigger, función y bloque anónimo pero en este caso con un tamaño en específico.
@@ -468,7 +452,7 @@ DBMS_OUTPUT.PUT_LINE('El número de empleado no existe en la tabla');
 END;
 /
 
--- 5.	COMPROBACIÓN DE LA FUNCION “EMPLEADOS_TRAMOS_IRPF”
+-- 6.5.	COMPROBACIÓN DE LA FUNCION “EMPLEADOS_TRAMOS_IRPF”
 /
 EXECUTE dbms_output.put_line('-- 5.	COMPROBACIÓN DE LA FUNCION “EMPLEADOS_TRAMOS_IRPF”');
 --Código principal para poder ejecutar cualquier procedimiento, trigger, función y bloque anónimo.
@@ -489,7 +473,7 @@ N_empleados:=EMPLEADOS_TRAMOS_IRPF(N_tramo);
 END;
 /
 
--- 6.	COMPROBACIÓN DE LOS TRIGGERS
+-- 6.6.	COMPROBACIÓN DE LOS TRIGGERS
 /
 EXECUTE dbms_output.put_line('-- 6.	COMPROBACIÓN DE LOS TRIGGERS');
 --Código principal para poder ejecutar cualquier procedimiento, trigger, función y bloque anónimo.
