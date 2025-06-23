@@ -1,96 +1,138 @@
-# Base_de_datos_personalizada
+# 🗄️ Base de Datos Personalizada
 
-## Creé una BBDD para crear bloques anónimos, triggers, procedures y sus respectivas comprobaciones.
+[![Issues](https://img.shields.io/github/issues/Skorpion02/Base_de_datos_personalizada?style=flat-square)](https://github.com/Skorpion02/Base_de_datos_personalizada/issues)
+[![Forks](https://img.shields.io/github/forks/Skorpion02/Base_de_datos_personalizada?style=flat-square)](https://github.com/Skorpion02/Base_de_datos_personalizada/network/members)
+[![Stars](https://img.shields.io/github/stars/Skorpion02/Base_de_datos_personalizada?style=flat-square)](https://github.com/Skorpion02/Base_de_datos_personalizada/stargazers)
+[![Last Commit](https://img.shields.io/github/last-commit/Skorpion02/Base_de_datos_personalizada?style=flat-square)](https://github.com/Skorpion02/Base_de_datos_personalizada/commits/main)
+[![License](https://img.shields.io/github/license/Skorpion02/Base_de_datos_personalizada?style=flat-square)](LICENSE)
+[![SQL](https://img.shields.io/badge/SQL-Oracle-blue?style=flat-square&logo=oracle)](#)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square&logo=github)](https://github.com/Skorpion02/Base_de_datos_personalizada/pulls)
 
-2.1 Cree un bloque anónimo que da salida por pantalla la tabla de multplicar 
-de un número que pasemos por pantalla desde el 1 hasta el 11.
+---
 
-Por ejemplo: Si la variable “tabladel” es 5. La salida por pantalla será la tabla de multplicar del 5:
- 
- 5 x 1 = 5 … Hasta … 5 x 11 = 55
+> **A robust Oracle SQL/PLSQL project with anonymous blocks, procedures, functions, triggers, and audit logic. Model complex business rules and ensure data validation & historical tracking.**
 
+---
 
-2.2 Cree un bloque anónimo donde declaré una variable constante llamada “salario_mes” de tpo NUMBER(10, 2) 
-que inicializa la variable con un valor de salario bruto mensual. Calcula el salario bruto anual y con ese 
-salario encuentraré el % de IRPF que se debería aplicar según la tabla de tramos de (Tabla IRPF_pac) y 
-calculará la cantdad de IRPF que se deberá pagar.
+## 📚 Project Overview
 
-Por ejemplo, si el valor de la variable “salario_mes” es 1000. La salida por pantalla será:
-o Salario mensual: 1000 €
-o Salario anual: 12000 €
-o IRPF aplicado: 19%
-o IRPF a pagar = 2280 €
+- **Goal:** Implement a custom Oracle database with business logic, validations, exception handling, triggers, and audit trails.
+- **Stack:** Oracle SQL & PL/SQL
 
+---
 
-3.1. Creé un procedimiento llamado “SUMA_IMPARES” que al pasarle un número entero como parámetro de
-entrada nos devuelva la suma de los números impares desde el 1 hasta el número pasado.
+## 🏗️ Main Features
 
+- **Full Schema Setup:** [Configuracion Inicial.sql](./Configuracion%20Inicial.sql) for table and data definition
+- **Business Logic:**
+  - **Anonymous Blocks:** Multiplication table, IRPF (tax) calculation, record queries and tests.
+  - **Procedures:**
+    - `SUMA_IMPARES`: Sum all odd numbers up to an integer.
+    - `IRPF_EMPLEADO`: Given an employee number, shows name, surname, annual salary, IRPF bracket & percentage. Handles "employee not found" error.
+  - **Functions:**
+    - `NUMERO_MAYOR`: Returns the largest of three numbers, with error on duplicates.
+    - `EMPLEADOS_TRAMOS_IRPF`: Returns the number of employees in a given IRPF bracket.
+  - **Triggers:**
+    - `COMPENSA_TRAMO_IRPF`: On salary update, if IRPF bracket increases, add €1,000 compensation automatically.
+    - `MODIFICACIONES_SALARIOS`: On salary change, adds entry to `AUDITA_SALARIOS` audit table with employee, date, time, old/new salary, and user.
+- **Comprehensive Test Blocks:** Anonymous PL/SQL blocks to test every logic piece and show sample outputs.
 
-3.2. Creé una función llamada “NUMERO_MAYOR” que devuelvolverá el mayor de 3 números pasados como
-parámetros, en caso de que se repita algún número, se ha de gestonar una excepción de error,
-diciendo “No se pueden repetr números en la secuencia”.
+---
 
+## 📄 Example Features & Expected Outputs
 
-4.1. Creé un procedimiento llamado “IRPF_EMPLEADO” el cual, al pasarle por parámetro un numero de
-empleado, devuelva los datos del empleado con el Nombre, apellidos y salario_anual y además ha de
-devolver, el tramo y % de IRPF que se le debe aplicar. En caso de que no exista el empleado se ha de
-gestonar el error con el mensaje “El número de empleado no existe en la tabla”
+- **Multiplication Table Block:**  
+  Prints multiplication table for a chosen number, from 1 to 11.  
+  _Example:_  
+  ```
+  5 x 1 = 5  
+  ...  
+  5 x 11 = 55
+  ```
 
+- **Salary and IRPF Block:**  
+  Given a monthly salary, computes annual salary, finds IRPF bracket and percentage, and shows total IRPF due.  
+  _Example:_  
+  ```
+  Salario mensual: 1000 €
+  Salario anual: 12000 €
+  IRPF aplicado: 19%
+  IRPF a pagar: 2280 €
+  ```
 
-4.2. Creé una función llamada “EMPLEADOS_TRAMOS_IRPF” que, dado un número de tramo pasado por
-parámetro, devuelva el total de empleados que se encuentran en ese mismo tramo de IRPF.
+- **Procedure `SUMA_IMPARES`:**  
+  _Input:_ 6  
+  _Output_: "El resultado de sumar los impares hasta 6 es: 9"
 
+- **Function `NUMERO_MAYOR`:**  
+  _Input:_ (23, 37, 32)  
+  _Output_: "El mayor entre (23, 37, 32) es: 37"  
+  _(Returns error if any two numbers are equal)_
 
-5.1. Creé un trigger llamado “COMPENSA_TRAMO_IRPF” que, al modifcar el salario de un empleado, si la
-modifcación implica un cambio en el tramo de IRPF (Ejemplo pasar de cobrar 20.000€ a 30.000€) se
-incremente automátcamente 1000€ el nuevo salario, para compensar el cambio de tramo.
+- **Procedure `IRPF_EMPLEADO`:**  
+  _Input:_ Employee #1  
+  _Output_: "Antonio García Melero, con salario de 25000 € en tramo 3, con IRPF de un 30%"
 
-5.2. Creé un trigger llamado “MODIFICACIONES_SALARIOS” que, al realizar una modifcación en el salario de
-un empleado, actualiza una nueva tabla llamada “AUDITA_SALARIOS”, esta nueva tabla será como un
-histórico de cambios realizados en el salario de los empleados. Campos de la nueva tabla a crear:
+- **Function `EMPLEADOS_TRAMOS_IRPF`:**  
+  _Input:_ Bracket 5  
+  _Output_: "En el tramo 5 de IRPF, tenemos a 2 empleados."
 
-->id_emp NUMBER(2)
+- **Salary Update & Audit Test:**  
+  Update salary for an employee and verify that both triggers (`COMPENSA_TRAMO_IRPF`, `MODIFICACIONES_SALARIOS`) work and audit trail is written.
 
-->salario_antguo NUMBER(10, 2)
+---
 
-->salario_nuevo NUMBER(10, 2)
+## 🗂️ Repository Structure
 
-->fecha DATE (Fecha en la que se produce la modifcación)
+```
+Base_de_datos_personalizada/
+├── Configuracion Inicial.sql     # Tables and initial data
+├── Estructura.sql               # Procedures, functions, triggers, test blocks
+├── README.md
+```
 
-->hora VARCHAR2(10) (Hora en la que se produce la modifcación)
+---
 
-->username  VARCHAR2(10) (Usuario que realiza la modifcación)
+## 🚀 How to Use
 
----------------------------------------------------------------
---------------------- COMPROBACIÓN ----------------------------
----------------------------------------------------------------
+1. **Initialize the Database**
+   - Run `Configuracion Inicial.sql` in your Oracle SQL environment to create tables and populate sample data.
 
-6.1. Creé un bloque anónimo que muestre el registro de la tabla “alumnos_pac” y el de la tabla
-“asignaturas_pac”.
+2. **Add Business Logic**
+   - Run `Estructura.sql` to create all procedures, functions, triggers, and test blocks.
 
+3. **Test Features**
+   - Execute the anonymous blocks at the end of `Estructura.sql` to see example outputs and verify correctness.
 
-6.2. Creé un bloque anónimo que use el procedimiento “SUMA_IMPARES”:
-* Número de la prueba: 6
-* Salida por pantalla: “El resultado de sumar los impares hasta 6 es: 9”
+---
 
+## 🤝 Contributing
 
-6.3. Creé un bloque anónimo que use la función “NUMERO_MAYOR”.
-* Números de la prueba: 23, 37, 32
-* Salida por pantalla: “El mayor entre (23, 37, 32) es: 37”
+Contributions, improvements, and feature requests are welcome!
 
+- Check [issues](https://github.com/Skorpion02/Base_de_datos_personalizada/issues)
+- Open a [pull request](https://github.com/Skorpion02/Base_de_datos_personalizada/pulls)
+- ⭐ Star this repo if you find it useful!
 
-6.4. Creé un bloque anónimo que use el procedimiento “IRPF_EMPLEADO”.
-* Números empleado de la prueba: 1
-* Salida por pantalla: “Antonio García Melero, con salario de 25000 € en tramo 3, con IRPF de un 30%”
+---
 
+## 📬 Contact
 
-6.5. Creé un bloque anónimo que use la función “EMPLEADOS_TRAMOS_IRPF”.
-* Número de tramo de la prueba: 5
-* Salida por pantalla: “En el tramo 5 de IRP, tenemos a 2 empleados.”
+- **Author:** [Skorpion02](https://github.com/Skorpion02)
+- **Repository:** [Base_de_datos_personalizada](https://github.com/Skorpion02/Base_de_datos_personalizada)
 
+---
 
-6.6. Creé un bloque anónimo que pida por pantalla un número de empleado y un salario. Ha de actualizar el
-salario del empleado si existe y comprobaremos que los triggers han funcionado.
+## 📝 License
 
-**Salida por pantalla: “El salario del empleado (Nombre empleado) se ha modifcado el día (Últma
-Fecha y hora de modifcación), antes era de (Anterior Salario) € y ahora es de (Nuevo salario) €”
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+⭐️ **If you found this project helpful, please give it a star!**
+
+---
+
+<div align="center">
+  <b>Made with ❤️ by Skorpion02</b>
+</div>
