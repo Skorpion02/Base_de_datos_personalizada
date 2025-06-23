@@ -1,4 +1,4 @@
-# 🗄️ Base de Datos Personalizada
+# 🗄️ Custom Data Hub
 
 [![Issues](https://img.shields.io/github/issues/Skorpion02/Base_de_datos_personalizada?style=flat-square)](https://github.com/Skorpion02/Base_de_datos_personalizada/issues)
 [![Forks](https://img.shields.io/github/forks/Skorpion02/Base_de_datos_personalizada?style=flat-square)](https://github.com/Skorpion02/Base_de_datos_personalizada/network/members)
